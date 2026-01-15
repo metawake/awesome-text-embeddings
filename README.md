@@ -1,8 +1,10 @@
 # Awesome Text Embeddings [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-> A curated list of text embedding models and tools for evaluating them.
+> An opinionated buyer's guide for text embeddings in production — RAG, search, classification.
 
 Text embeddings convert text into dense vectors for semantic search, retrieval, clustering, and classification. This list helps you choose the right embedding model for your use case.
+
+**Last reviewed: January 2025** · [Suggest an update](CONTRIBUTING.md)
 
 ## Quick Picks
 
@@ -11,11 +13,13 @@ Just want a recommendation? Start here:
 | Use Case | Model | Why |
 |----------|-------|-----|
 | **Best overall (API)** | [text-embedding-3-large](https://platform.openai.com/docs/guides/embeddings) | Highest quality, 8k context, adjustable dims |
-| **Best overall (open)** | [NV-Embed-v2](https://huggingface.co/nvidia/NV-Embed-v2) | MTEB #1, 32k context (CC-BY-NC) |
+| **Best overall (open)** | [NV-Embed-v2](https://huggingface.co/nvidia/NV-Embed-v2) | MTEB #1, 32k context ⚠️ CC-BY-NC |
 | **Best budget** | [text-embedding-3-small](https://platform.openai.com/docs/guides/embeddings) | $0.02/1M tokens, still good quality |
 | **Best local/private** | [nomic-embed-text-v2-moe](https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe) | MoE architecture, multilingual, GGUF available |
 | **Best multilingual** | [multilingual-e5-large](https://huggingface.co/intfloat/multilingual-e5-large) | 100+ languages, MIT license |
 | **Best for code** | [voyage-code-2](https://docs.voyageai.com/docs/embeddings) | Purpose-built, 16k context |
+
+> ⚠️ = Non-commercial license. Check before using in production.
 
 ---
 
@@ -23,6 +27,7 @@ Just want a recommendation? Start here:
 
 - [Quick Picks](#quick-picks)
 - [How to Choose](#how-to-choose)
+- [Common Gotchas](#common-gotchas)
 - [General Purpose](#general-purpose)
   - [Open Source](#open-source)
   - [API Services](#api-services)
@@ -60,6 +65,21 @@ Just want a recommendation? Start here:
 - **Context length**: Most models max at 512 tokens; some go to 8k+. Longer = fewer chunks needed.
 - **Open vs API**: Open = privacy, cost control, on-prem; API = simplicity, no infrastructure.
 - **Quality vs speed**: Larger models score higher on benchmarks but have higher latency.
+
+---
+
+## Common Gotchas
+
+Things that bite engineers in production:
+
+| Issue | What to watch for |
+|-------|-------------------|
+| **Query/passage prefixes** | E5 models require `query:` and `passage:` prefixes. Without them, quality drops significantly. Check model cards. |
+| **Normalization** | Some models output normalized vectors (use cosine), others don't (use dot product). Mixing these breaks similarity scores. |
+| **Matryoshka dimensions** | Models like OpenAI's and Nomic's support truncating dimensions (e.g., 3072→256). You must re-normalize after truncation. |
+| **License traps** | CC-BY-NC (NV-Embed-v2, SFR-Embedding) = no commercial use. Check before deploying. |
+| **Context overflow** | Tokens beyond max length are silently truncated. For long docs, chunk first or use long-context models. |
+| **Embedding drift** | API providers may update models silently. Pin versions or re-embed periodically if using managed APIs. |
 
 ---
 
