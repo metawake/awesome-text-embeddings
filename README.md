@@ -107,6 +107,7 @@ Just want a recommendation? Start here:
 |-------|----------|------|-----------|------------|-------|
 | [bge-m3](https://huggingface.co/BAAI/bge-m3) | BAAI | 1024 | 100+ | 8192 | Hybrid dense+sparse, long context |
 | [multilingual-e5-large](https://huggingface.co/intfloat/multilingual-e5-large) | Microsoft | 1024 | 100+ | 512 | Best open multilingual |
+| [EmbeddingGemma-300M](https://huggingface.co/google/embeddinggemma-300m) | Google | 768 | 100+ | 2048 | Top multilingual under 500M params, Matryoshka dims |
 | [multilingual-e5-base](https://huggingface.co/intfloat/multilingual-e5-base) | Microsoft | 768 | 100+ | 512 | Smaller variant |
 | [embed-multilingual-v3.0](https://docs.cohere.com/docs/embeddings) | Cohere | 1024 | 100+ | 512 | API, strong quality |
 | [paraphrase-multilingual-mpnet-base-v2](https://huggingface.co/sentence-transformers/paraphrase-multilingual-mpnet-base-v2) | SBERT | 768 | 50+ | 512 | Sentence-transformers |
@@ -246,6 +247,7 @@ Embedding models that handle both text and images together—useful for document
 |------|-------------|------|
 | **FastEmbed** | Fast, lightweight embedding inference by Qdrant | [GitHub](https://github.com/qdrant/fastembed) |
 | **Infinity** | High-throughput embedding server, OpenAI-compatible API | [GitHub](https://github.com/michaelfeil/infinity) |
+| **Model2Vec** | Distill sentence transformers to static embeddings — 500x faster, 50x smaller | [GitHub](https://github.com/MinishLab/model2vec) |
 | **Ollama** | Run embedding models locally (GGUF format) | [Ollama](https://ollama.ai/) |
 | **llama.cpp** | C++ inference for quantized models | [GitHub](https://github.com/ggerganov/llama.cpp) |
 | **TEI** | Hugging Face's Text Embeddings Inference server | [GitHub](https://github.com/huggingface/text-embeddings-inference) |
